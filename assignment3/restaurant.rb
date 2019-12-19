@@ -24,6 +24,7 @@ class Restaurant_portal
   end
 
   def check_item(item)
+    if 
     print @@qty[item]
     if @@qty[item] > 0
       return true
@@ -50,8 +51,13 @@ class Restaurant_portal
   end
 
   def place_order
-    @order_list = {}
-    @status = "placed"
+    if @status == "No items in cart"
+      puts "cart is empty"
+    else
+      @order_list = {}
+      @status = "placed"
+      puts "order is empty"
+    end
   end
 
   def accept_order()
@@ -97,6 +103,7 @@ puts "\n\n"
 ch =0
 
 while ch!=6
+  puts "//////// select option from list /////////"
   puts "1. add to cart\n2. show cart\n3. check item\n4. check status\n5. place order\n6. exit"
   ch = gets.chomp.to_i
 

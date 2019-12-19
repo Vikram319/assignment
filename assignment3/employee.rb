@@ -39,14 +39,7 @@ end
 emp = Employee.new() #way to create object of class
 
 emp.policy #accessing object method
-emp.salary
-
-
-
-
-
-
-
+Employee.class_fun
 
 
 
