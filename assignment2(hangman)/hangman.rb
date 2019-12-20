@@ -1,4 +1,3 @@
-
 def chances_left i
 	puts "chances left : #{i}"
 	puts
