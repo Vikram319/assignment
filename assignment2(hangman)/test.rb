@@ -55,7 +55,7 @@ end
 flag = true
 while flag
   game
-  print "want to play more?[y/n]"
+  print "want to play more?[y/n] hello"
   choice = gets.chomp
   if choice == 'n'
     flag = false
