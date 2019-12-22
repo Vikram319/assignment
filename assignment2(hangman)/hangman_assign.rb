@@ -1,63 +1,54 @@
-def chances_left i
-  puts "chances left : #{i}"
-  puts
+def chances_left(try)
+  puts "chances left : #{try}\n"
+end
+
+def find_hint(required)
+	guess_key = ''
+	required.length.times do
+		guess_key += 'X'
+	end
+	guess_key
+end
+
+def game_logic(required, guess_key)
+	i = 0
+	count = 0
+	loop do
+	chances_left 3 - i
+	guess = gets.chomp
+	if required.index(guess)
+		pos = required.index(guess)
+		required[pos] = '@'
+		count += 1
+		guess_key[pos] = guess
+		puts "current status: #{guess_key}"
+	else
+		i += 1
+	end
+	break if i == 3 || count >= required.length
+	end
+end
+
+def game_result(guess_key)
+  puts  'you lost game' if guess_key.index('X')
+  puts  'you won game'
 end
 
 def game
-  dictionary = ["january","feburary","march","april","may","june","july","august","september","october","november","december"]
+	dictionary = %w[january feburary march april may june july august
+								  september october november december]
   ran_num = rand(12)
   required = dictionary[ran_num]
   puts required
-  guess_key = ''
-  for i in 0..dictionary[ran_num].size-1 do
-    guess_key+='X'
-  end
-  puts guess_key
-  i=0
-  count = 0
-  while i<3 
-    chances_left 3-i
-    flag = true
-    guess = gets
-
-    for j in 0..dictionary[ran_num].size-1 do
-      if required[j] == guess[0] 
-        if guess_key[j] == 'X'
-          count+=1
-          guess_key[j] = guess[0]
-          flag = false
-          break
-        end
-      end
-    end
-    if count >= dictionary[ran_num].size
-      break
-    end
-
-    if flag
-      i+=1
-    end
-  end
-  flag = true
-  for i in 0..dictionary[ran_num].size-1 do
-    if guess_key[i] == 'X'
-      puts "you lost the game"
-      flag = false
-      break
-    end
-  end
-
-  if flag
-    puts "you won the game"
-  end
+  guess_key = find_hint required
+  puts "your hint is #{guess_key}"
+  game_logic required, guess_key
+  game_result guess_key
 end
 
-flag = true
-while flag
+loop do
   game
-  print "want to play more?[y/n]"
+  print 'want to play more?[y/n]'
   choice = gets.chomp
-  if choice == 'n'
-    flag = false
-  end
+  break if choice == 'n'
 end
