@@ -1,32 +1,36 @@
+# frozen_string_literal: true
+
 def chances_left(try)
   puts "chances left : #{try}\n"
 end
 
+def test; end
+
 def find_hint(required)
-	guess_key = ''
-	required.length.times do
-		guess_key += 'X'
-	end
-	guess_key
+  guess_key = ''
+  required.length.times do
+    guess_key += 'X'
+  end
+  guess_key
 end
 
 def game_logic(required, guess_key)
-	i = 0
-	count = 0
-	loop do
-	chances_left 3 - i
-	guess = gets.chomp
-	if required.index(guess)
-		pos = required.index(guess)
-		required[pos] = '@'
-		count += 1
-		guess_key[pos] = guess
-		puts "current status: #{guess_key}"
-	else
-		i += 1
-	end
-	break if i == 3 || count >= required.length
-	end
+  i = 0
+  count = 0
+  loop do
+    chances_left 3 - i
+    guess = gets.chomp
+    if required.index(guess)
+      pos = required.index(guess)
+      required[pos] = '@'
+      count += 1
+      guess_key[pos] = guess
+      puts "current status: #{guess_key}"
+    else
+      i += 1
+    end
+    break if i == 3 || count >= required.length
+  end
 end
 
 def game_result(guess_key)
@@ -35,8 +39,8 @@ def game_result(guess_key)
 end
 
 def game
-	dictionary = %w[january feburary march april may june july august
-								  september october november december]
+  dictionary = %w[january feburary march april may june july august
+                  september october november december]
   ran_num = rand(12)
   required = dictionary[ran_num]
   puts required
